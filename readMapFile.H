@@ -7,11 +7,11 @@ Info<< "Type the name of the WAsP file..." <<endl;
 char file[100];
 tmp = tmp + "/";
 
-cin.getline(file, 100);
+std::cin.getline(file, 100);
 tmp = tmp + file;
 
 // TODO - make the file the first available map file in the case base directory. In the use instructions it should be stated that only one map file should exist, and it will be used
-cout << "using filename " << tmp << endl;
+std::cout << "using filename " << tmp << endl;
 
 char nam[300];
 
@@ -36,8 +36,9 @@ for (int i = 0; i < ii; i++){
 }
 
 ii = 0;
-ifstream inFile;
+std::ifstream inFile;
 inFile.open(nam);
+//inFile.open(nam, std::ifstream::in);
 
 if (!inFile){
     Info << "Unable to open file " <<file<<endl;
@@ -59,11 +60,13 @@ while (!inFile.eof()) {
     a++;
 }
 
-cout << endl;
-cout << "polygons read: " << endl;
-cout << cadena << endl;
+std::cout << endl;
+std::cout << "polygons read: " << endl;
+std::cout << cadena << endl;
 
-Info<< "File(" << inFile << ") '" << nam << "' has been read" <<endl;
+//Info<< "File(" << inFile << ") '" << nam << "' has been read" <<endl;
+// Seemed to be trying to operate on ifstream object inFile
+Info<< "File(" << inFile.get() << ") '" << nam << "' has been read" <<endl;
 Info<<endl;
 
 Info<< "Now we need to relate the WAsP point files coordinate to our mesh coordinate system. For that purpose we will introduce some data" <<endl;
@@ -78,23 +81,23 @@ scalar b2 = 1;
 
 Info<<endl<< "* Introduce the offset between both coordinate system origins (x0, y0) mesh = offset + x0, y0)wasp : (the offset must be in mesh coordinates) " <<endl;
 Info<< "x_value: ";
-cin>>offset_x;
+std::cin>>offset_x;
 Info<< "y_value: ";
-cin>>offset_y;
+std::cin>>offset_y;
 Info<<endl<< "Now introduce the values (x, y) for the point (1, 0) wasp in mesh coordinates" <<endl;
 Info<< "x_value: ";
-cin>>a1;
+std::cin>>a1;
 Info<< "y_value: ";
-cin>>b1;
+std::cin>>b1;
 Info<<endl<< "Finally introduce the values (x, y) for the point (0,1) wasp in mesh coordinates" <<endl;
 Info<< "x_value: ";
-cin>>a2;
+std::cin>>a2;
 Info<< "y_value: ";
-cin>>b2;
+std::cin>>b2;
 Info<<endl;
-cout << "using x0 = " << offset_x << ", y0 = " << offset_y << endl;
-cout << "using a1 = " << a1 << ", a2 = " << a2 << endl;
-cout << "using b1 = " << b1 << ", b2 = " << b2 << endl;
+std::cout << "using x0 = " << offset_x << ", y0 = " << offset_y << endl;
+std::cout << "using a1 = " << a1 << ", a2 = " << a2 << endl;
+std::cout << "using b1 = " << b1 << ", b2 = " << b2 << endl;
 
 int cad_size = cadena.size();
 int n_polygons = 0;

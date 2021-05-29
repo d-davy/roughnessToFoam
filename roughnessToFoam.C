@@ -21,7 +21,8 @@ copied from Xabier Pedruelo Tapia 2009 MsC thesis
 #include <stdio.h>
 # include <fstream>
 # include <stdlib.h>
-using namespace std;
+//using namespace std;
+using namespace Foam;
 
 // ************************************************************** //
 
@@ -29,7 +30,7 @@ bool checkInside (vector, List<vector>);
 
 int main( int argc, char *argv[])
 {
-    printf("%d\n", __LINE__);
+    std::printf("%d\n", __LINE__);
         
 # include "setRootCase.H"
 # include "createTime.H"
@@ -38,6 +39,7 @@ int main( int argc, char *argv[])
 
 
     const fvPatchList& patches = mesh.boundary();
+    //fvPatchList& patches = mesh.boundary(); // Tried to remove type const because of assignment to read-only
     scalar startFace = mesh.neighbour().size();
 
 # include "readMapFile.H" //was Readmapfile.H

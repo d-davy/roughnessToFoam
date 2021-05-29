@@ -6,6 +6,7 @@ scalar sface = startFace;
 forAll(patches, patchi)
 {
     const fvPatch& curPatch = patches[patchi];
+    //fvPatch& curPatch = patches[patchi];
     if (isType<wallFvPatch>(curPatch))
     {
         forAll(curPatch, facei)
@@ -26,14 +27,14 @@ forAll(patches, patchi)
                 //label inletPatchId1 = mesh.boundaryMesh().findPatchID(curPatch.name()); // Hanan Einav Levy 27/09/12 : I remarked this out - and moved before the if statment
                 // debug
                 //printf("inside z0.boundaryField()[inletPatchId1 %d][facei %d] = z0InOut[0] %f;\n", inletPatchId1, facei, z0InOut[0]);
-                z0.boundaryField()[inletPatchId1][facei] = z0InOut[0]; // inserting the value inside the polygon. -- was "... = CsKs[0]" and then the same for Ks.boundaryField .. with out the else statement I added below
+                z0.boundaryFieldRef()[inletPatchId1][facei] = z0InOut[0]; // inserting the value inside the polygon. -- was "... = CsKs[0]" and then the same for Ks.boundaryField .. with out the else statement I added below
             }
             else // outside - should only happen in the first polygon, otherwise after that all the other polygons wiil be erased
             if (firstPolygon)
             {
                 // debug
                 //printf("outside z0.boundaryField()[inletPatchId1 %d][facei %d] = z0InOut[1] %f;\n", inletPatchId1, facei, z0InOut[1]);
-                z0.boundaryField()[inletPatchId1][facei] = z0InOut[1]; // inserting the value outside the polygon
+                z0.boundaryFieldRef()[inletPatchId1][facei] = z0InOut[1]; // inserting the value outside the polygon
             }
         }
     }
