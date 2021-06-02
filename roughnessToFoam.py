@@ -78,7 +78,7 @@ def main(args):
                         if b.find("ground")>-1:
                             nutDict["boundaryField"][b]["z0"] = 0
                             nutDict["boundaryField"][b]["z0"] = z0Ground
-                        
+
     nutDict.writeFile()
     os.chdir(cwd)
 
