@@ -79,7 +79,20 @@ def main(args):
                             nutDict["boundaryField"][b]["z0"] = 0
                             nutDict["boundaryField"][b]["z0"] = z0Ground
 
+    # 4 - writing z0 into epsilon file
+    epsilonDict = ParsedParameterFile("0/epsilon")
+    for b in epsilonDict["boundaryField"]:
+        if type(b) is str:
+            for c in epsilonDict["boundaryField"][b]:
+                if "z0" in c:
+                        if b.find("terrain")>-1:
+                            epsilonDict["boundaryField"][b]["z0"] = z0Terrain
+#                        if b.find("ground")>-1:
+#                            epsilonDict["boundaryField"][b]["z0"] = 0
+#                            epsilonDict["boundaryField"][b]["z0"] = z0Ground
+
     nutDict.writeFile()
+    epsilonDict.writeFile()
     os.chdir(cwd)
 
 if __name__ == '__main__':
