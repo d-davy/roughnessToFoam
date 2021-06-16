@@ -11,7 +11,7 @@ std::cin.getline(file, 100);
 tmp = tmp + file;
 
 // TODO - make the file the first available map file in the case base directory. In the use instructions it should be stated that only one map file should exist, and it will be used
-std::cout << "using filename " << tmp << endl;
+std::cout << "using filename " << tmp << std::endl;
 
 char nam[300];
 
@@ -60,9 +60,10 @@ while (!inFile.eof()) {
     a++;
 }
 
-std::cout << endl;
-std::cout << "polygons read: " << endl;
-std::cout << cadena << endl;
+//These were std::cout
+Info << endl;
+Info << "polygons read: " << endl;
+Info << cadena << endl;
 
 //Info<< "File(" << inFile << ") '" << nam << "' has been read" <<endl;
 // Seemed to be trying to operate on ifstream object inFile
@@ -95,9 +96,9 @@ std::cin>>a2;
 Info<< "y_value: ";
 std::cin>>b2;
 Info<<endl;
-std::cout << "using x0 = " << offset_x << ", y0 = " << offset_y << endl;
-std::cout << "using a1 = " << a1 << ", a2 = " << a2 << endl;
-std::cout << "using b1 = " << b1 << ", b2 = " << b2 << endl;
+std::cout << "using x0 = " << offset_x << ", y0 = " << offset_y << std::endl;
+std::cout << "using a1 = " << a1 << ", a2 = " << a2 << std::endl;
+std::cout << "using b1 = " << b1 << ", b2 = " << b2 << std::endl;
 
 int cad_size = cadena.size();
 int n_polygons = 0;
