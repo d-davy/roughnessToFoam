@@ -30,7 +30,7 @@ def main(args):
     cwd = os.getcwd()
     os.chdir(args.target)
     if len(glob.glob("*.map")) > 1:
-        print "error: more then a single map file in the directory, please delete all except one"
+        print ("error: more then a single map file in the directory, please delete all except one")
         raise SystemExit
     mapFileName = glob.glob("*.map")[0]
     remove_extra_spaces(mapFileName)
@@ -42,10 +42,10 @@ def main(args):
     z0Dict = ParsedParameterFile("0/z0")
     z0Dict.header["object"] = "z0"
     for b in z0Dict["boundaryField"]:
-        print b
+        print (b)
         if type(b) is str:
             if b.find("terrain")>-1 or b.find("ground")>-1:
-                print "found terrain/ground in z0 at patch " + b
+                print ("found terrain/ground in z0 at patch " + b)
                 z0Dict["boundaryField"][b]["value"]="uniform 0"
                 z0Dict["boundaryField"][b]["type"]="fixedValue"
     z0Dict["dimensions"] = "[ 0 1 0 0 0 0 0]"
@@ -62,10 +62,10 @@ def main(args):
             if b.find("terrain")>-1:
                 # TODO - save each different *terrain*'s z0 and place in matching nut *terrain*. at the moment - only one patch with "terrain" in it is expected, and one with "ground". 
                 z0Terrain = z0Dict["boundaryField"][b]["value"]
-                print "taken *terrain* z0 from %s" % b
+                print ("taken *terrain* z0 from %s" % b)
             if b.find("ground")>-1:
                 z0Ground = z0Dict["boundaryField"][b]["value"]
-                print "taken *ground* z0 from %s" % b
+                print ("taken *ground* z0 from %s" % b)
 
     # 3 - writing z0 into nut file
     nutDict = ParsedParameterFile("0/nut")
@@ -75,9 +75,9 @@ def main(args):
                 if "z0" in c:
                         if b.find("terrain")>-1:
                             nutDict["boundaryField"][b]["z0"] = z0Terrain
-                        if b.find("ground")>-1:
-                            nutDict["boundaryField"][b]["z0"] = 0
-                            nutDict["boundaryField"][b]["z0"] = z0Ground
+#                        if b.find("ground")>-1:
+#                            nutDict["boundaryField"][b]["z0"] = 0
+#                            nutDict["boundaryField"][b]["z0"] = z0Ground
 
     # 4 - writing z0 into epsilon file
     epsilonDict = ParsedParameterFile("0/epsilon")
